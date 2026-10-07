@@ -1,0 +1,37 @@
+@McpJiraConflu_HostAddress = https://localhost:7089
+@apiToken =
+
+### Health (без авторизации)
+GET {{McpJiraConflu_HostAddress}}/health
+
+### MCP initialize (нужен API-токен Bearer)
+POST {{McpJiraConflu_HostAddress}}/mcp
+Authorization: Bearer {{apiToken}}
+Content-Type: application/json
+Accept: application/json, text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "initialize",
+  "params": {
+    "protocolVersion": "2024-11-05",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "http-client",
+      "version": "1.0"
+    }
+  }
+}
+
+### MCP tools/list
+POST {{McpJiraConflu_HostAddress}}/mcp
+Authorization: Bearer {{apiToken}}
+Content-Type: application/json
+Accept: application/json, text/event-stream
+
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "method": "tools/list"
+}
